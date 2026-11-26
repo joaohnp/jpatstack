@@ -1,0 +1,21 @@
+# Engineering workflow: when to investigate, ask, build, or stop
+
+Research note and proposed default, not an installed skill. Sources are pinned so the comparison refers to the prompts that were actually read.
+
+## What to borrow, and where to diverge
+
+| Source | Useful instruction | Where it doesn't fit |
+| --- | --- | --- |
+| pstack: [sharpen](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/sharpen/SKILL.md), [prove it works](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/principle-prove-it-works/SKILL.md) | Start with the raw material. Identify what, apart from either party's opinion, would settle the question. Try it when a cheap experiment can settle it; reserve product choices for the owner. Verify where the behavior matters. | Don't make the operator rewrite the prompt, or build a harness when an existing query, browser, or example answers it. |
+| Matt: [grilling](https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/productivity/grilling/SKILL.md), [domain modeling](https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/domain-modeling/SKILL.md) | Check facts rather than quiz the user. Test meanings against a concrete case. Recommend an answer. Write an ADR when the decision is hard to reverse, surprising without context, and involved a real trade-off. | Grilling finishes only when every design branch is visited. Stop instead when the next decision is clear. |
+| Matt: [prototype](https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/prototype/SKILL.md), [to-tickets](https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/to-tickets/SKILL.md), [implement](https://github.com/mattpocock/skills/blob/6f7f7831a625f040a8e06a0e7954826b87ce775a/skills/engineering/implement/SKILL.md) | Prototype a decision, not a miniature production system. Split a larger job into pieces that can each be demonstrated. | The implementation prompt calls for a final full suite, review, and commit. A question, preview, or focused change has a different finish line. |
+| pstack: [personal mode](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/automate-me/SKILL.md), [reflect](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/reflect/SKILL.md), [correct](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/correct/SKILL.md) | Derive personal defaults from repeated, confirmed behavior. A recurring judgment error belongs in the skill that caused it; a recurring mechanical bug can often be removed at its source. | Don't turn a taste judgment into a linter. Nor adopt the entire [feature playbook](https://github.com/cursor/plugins/blob/b7b93c36be9bcc36a74db438e0fd385d660bc559/pstack/skills/poteto-mode/playbooks/feature.md): it prescribes delegation and can require competing implementations. |
+
+## Proposed working agreement
+
+- Answer a question as a question. For design work, inspect the existing path, show one real example in plain language, and give a recommendation. Ask only about a choice whose answer changes the next move; zero questions is valid.
+- Before adding anything, ask: **what present behavior or requirement fails without it?** Use what exists if the answer is “none.” Remove duplication in the path being changed, not as a separate cleanup project.
+- Make the uncertain part real. A mock can settle whether a layout is usable. It cannot settle whether two KPI views count the same population: compare the actual views and their inputs for the same period.
+- Stop at the requested handoff. A discussion doesn't imply a ticket, a ticket doesn't imply permission to build, and a verified local change isn't a deployment.
+
+First experiment: apply these defaults to the next design discussion and the next focused change. Did the agent surface a decision the operator needed to make, prove the requested behavior, and stop without a reminder? Keep only the rules that change those outcomes.
